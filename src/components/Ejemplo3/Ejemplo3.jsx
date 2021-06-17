@@ -1,3 +1,4 @@
+//De esta forma hay que pasar los props manualmente en cada nivel
 import React from 'react';
 
 const Padre =  (props) => {

@@ -3,67 +3,60 @@ import React from 'react';
 
 const Store = React.createContext();
 
-const Padre =  (props) => {
-    const nombre = "Sebas"
+const App = (props) => {
+    const estadoInicial = {
+        productos: ({id: 1, nombre: "Producto1", precio:33}, {id: 2, nombre: "Producto2", precio:11}),
+        productoSeleccionado: 2
+    }    
     return(
-        //lo usamos como contenedor/proveedor de todos los hijos 
-        <Store.Provider value={nombre}> 
+        <Store.Provider value={estadoInicial}>
             {props.children}
-        </Store.Provider>        
-    )
-}
-
-const Hijo1 = (props) => {
-    
-    // return(
-    //     //el estore consume el valor que le paso el padre, lo recibe mediante una fc arrow
-    //     <Store.Consumer>
-    //         {//cod html entre llaves
-    //         (value) => {
-    //             return(
-    //                 <>
-    //                     <div>Hijo 1 - Mi padre es {value}</div>
-    //                     {props.children}//Tambien van a poder conocerlo sus nietos 
-    //                 </>
-    //             )
-    //         }
-    //         }
-    //     </Store.Consumer>
-    // )   
-    const value = React.useContext(Store);//Usar el contexto del valor
-    return(
-        <>
-            <div>Hijo 1 - Mi padre es {value}</div>
-            {props.children}//Tambien van a poder conocerlo sus nietos 
-        </>
+        </Store.Provider>
 
     )
 }
 
-const Hijo2 = (props) => {
-    const value = React.useContext(Store);
+const ListaProductos = () =>{
+    const context = React.useContext(Store);
+    const {productos} = context;
     return(
         <div>
-            <div>Hijo 2 - Mi papá es {value}</div>
-            {props.children}
+            <table>
+                <tr>
+                    <th> Nombre</th>
+                    <th>Precio</th>
+                </tr>
+                
+                {productos.map(prod =>{//itero productos
+                    return(
+                        <tr key={prod.id}>
+                            <th>{prod.nombre}</th>
+                            <th>{prod.precio}</th>
+                        </tr>
+
+                    )
+                })}
+                
+            </table>
         </div>
     )
 }
 
-const Nieto = () => {
-    const value = React.useContext(Store);
-    return <div>Soy el nieto - Mi abuelo es {value}</div>
-}
-
-const Ejemplo4 = () => {
+const MostrarProductos = () => {
     return(
-        <Padre>
-            <Hijo1>
-                <Nieto />
-            </Hijo1>
-            <Hijo2></Hijo2>
-        </Padre>
+        <div>
+            Mostrar productos
+        </div>
     )
 }
 
-export default Ejemplo4;
+const Ejemplo5 = () => {
+    return(
+        <App>
+            <ListaProductos/>
+            <MostrarProductos/>
+        </App>
+    )
+}
+
+export default Ejemplo5;

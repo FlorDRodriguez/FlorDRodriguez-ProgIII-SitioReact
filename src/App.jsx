@@ -7,12 +7,13 @@ import React, { useState } from 'react';
 //import Ejemplo6 from './Reducers/Ejemplo6';
 //import Ejemplo7 from './Reducers/Ejemplo7';
 //import Ejemplo8 from './Reducers/Ejemplo8';
-import Ejemplo9 from './Reducers/Ejemplo9';
+//import Ejemplo9 from './Reducers/Ejemplo9';
+import Ejemplo10 from './Effect/Ejemplo10';
 
 function App(){
     return(
         <>
-            <Ejemplo9 />
+            <Ejemplo10 />
         </>
     )
 }
